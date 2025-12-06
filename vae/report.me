@@ -1,3 +1,160 @@
-.ti
-A Report on (Conditional) Variational Autoencoders
+.RP
+.EQ
+delim $$
+.EN
+
+
+.P1
+.DA
+.TL
+(Conditional) Variational Autoencoders
+.AU
+Gabriel Rolland
+.AI
+HES-SO University of Applied Sciences and Arts Western Switzerland
+.AB
+A report on Variational  Autoencoders and their Conditional variant.
+To be read with the associated jupyter notebook.
+.AE
+.NH
+Autoencoders
+
+.PP
+An autoencoder is a type of neural network where we encode an input
+.B x
+to a latent representation
+.B z
+we then pass this latent representation to a decoder
+whose task is to reconstruct the output from the latent variable
+.B z.
+Autoencoders
+.I "per se"
+are not capable of generation.
+They only reconstruct from a latent representation.
+This is why we augment them with variational methods
+to provide them with the ability to generate new samples.
+.NH
+Variational Autoencoders (VAE)
+.PP
+Variational autoencoders are made in such a way to allow generation of output
+instead of mere reconstruction. As said, instead of representing the latent
+.B z
+as a single point, a VAE encodes it as a distribution.
+Since
+.B z
+is a distribution, we can freely sample from this distribution and here we
+have our generation! Good.
+.LP
+Equation (1) shows the Expectation Lower Bound Objective. Where $Λ$
+denotes our ELBO objective function and $E$ denotes expectation. We
+can see that it consists of the Expectation of the reconstruction and
+the KL divergence as a regularizer.
+
+.EQ (1)
+Λ ( theta , phi , x ) =  E sub { { q sub phi} ^ ( z | x )} [ log p sub theta ~( x | z ) ]
+- D sub KL ( q sub phi ( z | x ) || p ( z ))
+.EN
+.LP
+Our implementation of a VAE is thus:
+.IP 1)
+Use a fully-connected MLP to encode our input in
+.B z
+.IP 2)
+Reparametrize our mean and logvar by sampling a Normal distribution
+.IP 3)
+Use an MLP with reverse architecture to decode the reparametrized
+.B z
+.DS
+.ft C
+def encode(self, x):
+        # TODO: Implement encoder forward pass
+        # 1. Flatten the input x to (batch_size, input_dim)
+        # 2. Pass through encoder_shared
+        # 3. Get mu and logvar from the heads
+        # Return: mu, logvar
+        x = x.view(-1, self.input_dim)
+        x = self.encoder_shared(x)
+        mu = self.fc_mu(x)
+        logvar = self.fc_logvar(x)
+        return mu, logvar
+
+    def reparameterize(self, mu, logvar):
+          # TODO: Calculate the standard deviation from log variance
+          # TODO: Sample epsilon from a standard normal distribution
+          # TODO: Return z
+          std = torch.exp(0.5 * logvar)
+          eps = torch.randn_like(logvar).to(DEVICE)
+          z = mu + std * eps
+          return z
+
+    def decode(self, z):
+        # TODO: Implement decoder forward pass
+        # 1. Pass z through decoder
+        # 2. Reshape output to (batch_size, 1, 28, 28)
+        # Return: reconstructed image
+        recon_x_flat = self.decoder(z)
+        return recon_x_flat.view(-1, 1, 28, 28)
+
+    def forward(self, x):
+        # TODO: Implement the full forward pass
+        # 1. Encode
+        # 2. Reparameterize
+        # 3. Decode
+        # Return: recon_x, mu, logvar
+        mu, logvar = self.encode(x)
+        z = self.reparameterize(mu, logvar)
+        recon_x = self.decode(z)
+        return recon_x, mu, logvar
+.DE
+.NH
+Conditional Variational Autoencoders (cVAE)
+.PP
+Our VAE is able to generate image.
+cVAE has the extra power to generate according to some condition.
+.EQ (2)
+Λ ( theta , phi , x ) =  E sub { { q sub phi} ^ ( z | x , c )} [ log p sub theta ~( x | z , c ) ]
+- D sub KL ( q sub phi ( z | x , c ) || p ( z ))
+.EN
+.DS
+.ft C
+def encode(self, x, c):
+        # 1. Flatten x
+        # 2. Concatenate x_flat and c
+        # 3. Pass through encoder_shared and heads
+        # Return: mu, logvar
+        x = x.view(-1, self.input_dim)
+        x_c = torch.cat((x, c), dim=1)
+        x = self.encoder_shared(x_c)
+        mu = self.fc_mu(x)
+        logvar = self.fc_logvar(x)
+        return mu, logvar
+	# And we do the same trick in the decoder
+.DE
+.NH
+Extra Task
+.SH
+Training excluding KL divergence from objective loss
+.PP
+If we just use the reconstruction error as the loss term,
+i. e. equation (3).
+We should expect the model to perform well on reconstruction,
+but be unable to generate a good approximation of the original sample.
+In layman terms our VAE would be good at reconstructing output,
+but bad at generating new images.
+.EQ (3)
+Lambda = E sub { { q sub phi} ^( z | x )} [ log p sub theta ~( x | z ) ]
+.EN
+Effectively, we can see in the generated samples by this version
+with just the log likelihood, that our model is as good at reconstructing input,
+but way worse at generating images.
+.sp 17
+.B "FIG 1:"
+Generated images with ELBO vs BCE loss only.
+.SH
+Conclusion
+.PP
+We have summarized very shortly different kinds of autoencoders with
+emphasis on principles and higher order view rather than details of
+implementation. See the associated notebook for visualizations
+and step by step implementation.
 
