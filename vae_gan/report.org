@@ -1,0 +1,19 @@
+#+TITLE: A Report on VAE GAN
+#+Author: Gabriel Rolland
+
+HES-SO University of Applied Sciences and Arts Western Switzerland
+
+A report on the combination of Generative Adversarial Networks and
+Variational Autoencoders.
+This work is based on previous implementation of the VAE.
+Based on [vae_gan_paper].
+
+* GAN and VAE
+
+* The paper
+
+
+
+
+* References
+vae_gan_paper Autoencoding beyond pixels using a learned similarity metric
