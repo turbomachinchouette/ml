@@ -30,28 +30,6 @@ That is, the loss consists of two terms:
 1. How well the Discriminator plays $log(Dis(x))$ and
 2. How bad the Discriminator is fooled by the generator $log(1 -Dis(Gen(z)))$
 
-* Requirements
-** Quantitative metrics
-- Reconstruction MSE, compare from cVAE
-- Compare MSE values with visual quality of reconstruction.
-
-** Qualitative Analysis
-- Plot a grid comparing cVAE and GAN and discuss
-- Conditioned Generation
-- Latent Interpolation
-- Style Transfer
-
-** Answer
-1. How does the VAE-GAN compare to cVAE in terms of image quality and diversity?
-2. What challenges did you face in balancing VAE and GAN objectives
-3. How effective is the conditional generation?
-4. What is the effect of using deature matching loss?
-5. What improvement would you suggest
-
-* Tips
-- *Hyperparameters* start with $\gamma = 10^{-6}$.
-- Maybe you have to give extra training to the Generator.
-- Avoid BatchNorm in the last layer of Gen and first layer of Dis.
 
 * References
 
