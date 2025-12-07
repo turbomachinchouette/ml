@@ -1,2 +1,4 @@
 *~
 *.dvi
+/vae_gan/ltximg/
+*pdf

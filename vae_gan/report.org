@@ -1,19 +1,38 @@
+#+Bibliography: ~/Public/ml/ml.bib
 #+TITLE: A Report on VAE GAN
 #+Author: Gabriel Rolland
+#+OPTIONS: toc:nil
 
-HES-SO University of Applied Sciences and Arts Western Switzerland
-
+#+begin_abstract
 A report on the combination of Generative Adversarial Networks and
 Variational Autoencoders.
 This work is based on previous implementation of the VAE.
-Based on [vae_gan_paper].
+Based on [cite:@larsen_autoencoding_2016].
+#+end_abstract
 
 * GAN and VAE
+The point of the paper by Larsen et al. is to make a model
+learn a feature representation instead of element-wise errors.
+The question is how to learn this feature representation?
+They do it by substituting the VAE decoder by a GAN.
+Applying this to a dataset of faces, they show that the model
+can extract higher order abstract features like "wearing glasses", "black hair", etc.
+and apply them to generate new images with the requested features.
 
-* The paper
+* Implementation
+All the point is to collapse the decoder from our VAE into a GAN.
+GAN are neural networks that play a minimax game where a generator (Gen) tries to fool a discriminator (Dis).
+They show the following loss:
+$$
+\mathcal{L}_{GAN} = log(Dis(x)) +  log(1 - Dis(Gen(z)))
+$$
+That is, the loss consists of two terms:
+1. How well the Discriminator plays $log(Dis(x))$ and
+2. How bad the Discriminator is fooled by the generator $log(1 -Dis(Gen(z)))$
 
 
 
 
 * References
-vae_gan_paper Autoencoding beyond pixels using a learned similarity metric
+
+#+PRINT_BIBLIOGRAPHY: 
