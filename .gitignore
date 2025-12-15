@@ -2,3 +2,6 @@
 *.dvi
 /vae_gan/ltximg/
 *pdf
+*ps
+*/data/*
+
