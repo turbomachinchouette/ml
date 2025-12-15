@@ -1,0 +1,44 @@
+%T Attention Is All You Need
+%A Vaswani, Ashish
+%A Shazeer, Noam
+%A Parmar, Nike
+%A Uszkoreit, Jakob
+%A Jones, Llion
+%D 2017
+%R arXiv:1706.03762
+%K vaswani transformers attention
+
+%T Computational Ecology: Artificial Neural Networks and Their Applications
+%A Zhang, WenJun
+%D 2010
+%P World Scientific
+%C Singapore
+%K zhang ecology ann
+
+%T Recurrent Neural Networks (RNNs): A gentle introduction
+%A Schmidt, Robin M.
+%K Schmidt rnn
+%D 2019
+%R 10.48550/arXiv.1912.05911
+
+%T Notation as a Tool of Thought
+%A Iverson, Kenneth E.
+%D 1979
+%K notation iverson apl
+%R https://doi.org/10.1145/358896.35889
+%J Communications of the ACM
+%V 23
+%N 8
+
+%T SimGait - Classification de démarche pour patients ayant une pathologie de la marche
+%R https://sonar.rero.ch/hesso/documents/314874
+%A Barreiro Lindo, Flávio
+%A Gülen, Lukas
+%A Perritaz, Alex
+%A Kalousis, Alexandros (dir.)
+%K simgait groupe
+
+%T Automatic labelling for motion capture
+%A Duvernay, François
+%A Kalousis, Alexandros (dir.)
+%R https://sonar.rero.ch/hesso/documents/323067
