@@ -42,3 +42,21 @@
 %A Duvernay, François
 %A Kalousis, Alexandros (dir.)
 %R https://sonar.rero.ch/hesso/documents/323067
+
+%T Pattern Classification
+%A  Hart, Peter E.
+%A Duda, Richard 0.
+%A Stork, David G.
+%P John Wiley & Sons
+%D 2001
+%C Chicago
+%K pattern classification duda
+
+%T Autoencoding beyond pixels using a learned similarity metric
+%R http://arxiv.org/abs/1512.09300
+%D 2016
+%A Larsen, Anders Boesen Lindbo
+%A Sønderby, Søren Kaae
+%A Larochelle, Hugo
+%A Winther, Ole
+%K VAE GAN
