@@ -3,3 +3,35 @@ $$
 \mathcal{L}(\theta, \phi; \mathbf{x}) = \underbrace{\mathbb{E}_{q_\phi(\mathbf{z}|\mathbf{x})}[\log p_\theta(\mathbf{x}|\mathbf{z})]}_{\text{Reconstruction (Log-Likelihood)}} - \underbrace{D_{KL}(q_\phi(\mathbf{z}|\mathbf{x}) \| p(\mathbf{z}))}_{\text{Regularization (KL Divergence)}}
 $$
 
+
+* Bayesian methods
+** Bayes' rule
+$$
+\displaystyle P(A\vert B)={\frac {P(B\vert A)P(A)}{P(B)}} 
+$$
+
+Probability that event A if B is true (i. e. posterior of A given B)
+is also a conditional probability: the probability of B given A is
+true and the probabilities of observing B and A without any given
+conditions. This is the prior probability and marginal probability.
+
+* Interpolation
+Using discrete data to construct a functional relationship.
+** Lagrange Interpolation
+$$
+Ln(x) = \sum_{i=1}^{d}L_i(x_i) f(x_i)
+$$
+where $L_i$ is the basis function:
+$$
+l_i(x) = [(x - x_0)(x - x_1) \dots
+(x - x_{i-1})(x - x_{i+1}) \dots (x - x_n) ] /
+[(x_i - x_0)(x_i - x_1) \dots
+(x_i - x_{i-1})(x_i - x_{i+1}) \dots (x_i - x_n) ]
+$$
+
+
+#+end_src
+** Newton Interpolation
+** Hermite Interpolation
+** Spline Interpolation
+

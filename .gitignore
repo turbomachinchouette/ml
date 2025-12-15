@@ -1,6 +1,6 @@
 *~
 *.dvi
-/vae_gan/ltximg/
+*/ltximg/
 *pdf
 *ps
 */data/*
